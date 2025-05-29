@@ -1,4 +1,28 @@
 public class Binary_Subarrays_With_Sum {
+
+
+    public static int sumlessthangoal(int[] nums,int goal)
+    {
+        if(goal<0)
+        return 0;
+        int sum=0,count=0,l=0,r=0;
+        int n=nums.length;
+        while(r<n)
+        {
+            sum+=nums[r];
+            while(sum>goal)
+            {
+                sum-=nums[l];
+                l++;
+            }
+            if(sum<=goal)
+            {
+                count+=r-l+1;
+            }
+            r++;
+        }
+        return count;
+    }
     public static void main(String[] args) {
         int[] nums={0,0,0,0,0};
         int goal=0;
@@ -17,7 +41,8 @@ public class Binary_Subarrays_With_Sum {
                 break;
             }
         }
-        System.out.println(count);
-
+        System.out.println("Brute Force"+count);
+        int ans=sumlessthangoal(nums,goal)-sumlessthangoal(nums, goal-1);
+        System.out.println("Optimum"+ans);
     }
 }

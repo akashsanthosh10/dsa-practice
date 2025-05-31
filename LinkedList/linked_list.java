@@ -23,19 +23,16 @@ public class linked_list {
         }
         void addLast(int val)
         {
+            Node temp=new Node();
+            temp.data=val;
+            temp.next=null;
             if(size==0)
-            {
-                Node temp=new Node();
-                temp.data=val;
-                temp.next=null;
+            { 
                 head=tail=temp;
                 size++;
             }
             else
             {
-                Node temp=new Node();
-                temp.data=val;
-                temp.next=null;
                 tail.next=temp;
                 tail=temp;
                 size++;
@@ -252,6 +249,26 @@ public class linked_list {
 
             }
         }
+        void remove_duplicate()
+        {
+            Node curr=head.next;
+            Node prev=head;
+            while(curr!=null)
+            {
+                if(prev.data!=curr.data)
+                {
+                    prev=curr;
+                    curr=curr.next;
+                }
+                else
+                {
+                    curr=curr.next;
+                    prev.next=curr;
+
+                }
+            }
+
+        }
         static Link_list merge(Link_list l1,Link_list l2)
         {
             Node n1=l1.head;
@@ -330,5 +347,16 @@ public class linked_list {
        l2.display();
        Link_list merge_list=Link_list.merge(l1,l2);
        merge_list.display();
+
+       Link_list d=new Link_list();
+       d.addLast(1);
+       d.addLast(1);
+       d.addLast(2);
+       d.addLast(2);
+       d.addLast(3);
+       d.addLast(4);
+       d.display();
+       d.remove_duplicate();
+       d.display();
     }
 }

@@ -3,46 +3,38 @@ import java.util.Stack;
 
 public class balanced_bracket {
         public static void main(String[] args) {
-        Stack  <Character> s=new Stack<Character>();
         Scanner sc=new Scanner(System.in);
         String exp=sc.nextLine();
-        for(int i=0;i<exp.length();i++)
+        Stack <Character> st=new Stack<Character>();
+        char[] s1=exp.toCharArray();
+        for(int i=0;i<s1.length;i++)
         {
-            System.out.println(exp.charAt(i)+"  "+s);
-            if(exp.charAt(i)=='(' ||exp.charAt(i)=='{' ||exp.charAt(i)=='[')
+            if(s1[i]=='(' ||s1[i]=='{' ||s1[i]=='[')
             {
                
-                s.push(exp.charAt(i));
+                st.push(s1[i]);
             }
-            else if(exp.charAt(i)==')')
+            else
             {
-                if(s.size()==0)
-                {System.out.println(false);return;}
-                else if(s.peek()=='(')
-                s.pop();
-                else{System.out.println(false);return;}
-                
-            }
-            else if(exp.charAt(i)==']')
-            {
-                if(s.size()==0)
-                {System.out.println(false);return;}
-                else if(s.peek()=='[')
-                s.pop();
-                else{System.out.println(false);return;}
-                
-            }
-            else if(exp.charAt(i)=='}')
-            {
-                if(s.size()==0)
-                {System.out.println(false);return;}
-                else if(s.peek()=='{')
-                s.pop();
-                else{System.out.println(false);return;}
-                
+                if(st.size()==0)
+                {
+                    System.out.println(false);
+                    return;
+                }
+                    
+                char ch=st.peek();
+                if(s1[i]==')' && ch=='(' || s1[i]==']' && ch=='[' || s1[i]=='}' && ch=='{')
+                {
+                    st.pop();
+                }
+                else
+                {
+                    System.out.println(false);
+                    return;
+                }
             }
         }
-        System.out.println(true);
+        System.out.println(st.isEmpty());
 
     }
     
